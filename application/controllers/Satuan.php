@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit("No direct script access allowed");
+
 class Satuan extends CI_Controller{
     function __construct(){
         parent::__construct();
@@ -11,5 +12,10 @@ class Satuan extends CI_Controller{
         $data['deskripsi']  = "Manage Data Satuan";
         $data['data']       = $this->mSatuan->getData();
         $this->template->views('view_satuan',$data) ;
+    }
+
+    function tampilkanData() {
+        $data = $this->mSatuan->getData();
+        echo json_encode($data);
     }
 }

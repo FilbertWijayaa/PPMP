@@ -80,9 +80,9 @@
             html = html + '<tr>'
             + '<td>' + no + '</td>'
             + '<td>' + response[i].nama_kategori + '</td>'
-            + '<td><center>' + '<span> <button edit-id="'+response[i].id_kategori+
-              '" class="btn btn-success btn-xs btn_edit"><i class="fa fa-edit"></i> Edit</button> <button style="margin-left: 5px;" data-id=" '
-              +response[i].id_kategori+'" class="btn btn-danger btn-xs btn_hapus"><i class="fa fa-trash"></i> Hapus</button></span>' + '</td>'
+            + '<td><center>' + '<span> <button edit-id="'+response[i].id_kategori
+            + '" class="btn btn-success btn-xs btn_edit"><i class="fa fa-edit"></i> Edit</button> <button style="margin-left: 5px;" data-id=" '
+            + response[i].id_kategori+'" class="btn btn-danger btn-xs btn_hapus"><i class="fa fa-trash"></i> Hapus</button></span>' + '</td>'
             + '</tr>';
           }
           $("#tbl_data").html(html);
@@ -94,7 +94,6 @@
         }
       });
     }
-  })
 
 //Memanggil Modal kategori
 $(document).on("click", "#btnTambah", function(e){
@@ -206,7 +205,6 @@ $("#tbl_data").on('click','.btn_hapus',function(e){
     allowOutsideClick: () => !swal.isLoading()
   }).then((result) => {
     if (result.value) {
-
       $('#mydata').dataTable({"bDestroy": true}).fnDestroy();
       tampil_data(); 
       Swal.fire({
@@ -218,3 +216,5 @@ $("#tbl_data").on('click','.btn_hapus',function(e){
     }
   })
 });
+});
+</script>

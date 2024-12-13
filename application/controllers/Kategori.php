@@ -10,7 +10,6 @@ class Kategori extends CI_Controller{
         $data['page']       = "Kategori";
         $data['judul']      = "Data Kategori";
         $data['deskripsi']  = "Manage Data Kategori";
-        $data['data'] = $this->mKategori->getData();
         $this->template->views('view_kategori',$data) ;
     }
 
@@ -24,18 +23,19 @@ class Kategori extends CI_Controller{
     function tambahData(){
         $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
         if ($this->form_validation->run() == FALSE) {
-            $response = array('response' => 'error', 'message' => validation_errors());
-        }else{
+            $response = array('responce' => 'error', 'message' => validation_errors());
+        } else {
             $nama_kategori = $this->input->post('nama_kategori');
             $validData = $this->mKategori->cekDuplicate($nama_kategori);
-            if ($validData>=1){
-                $response = array('response' => 'error', 'message' => 'Nama Kategori Barang Sudah Terdaftar..');
-            }else{
+
+            if ($validData >= 1) {
+                $response = array('response' => 'error', 'message' => 'Nama Kategori Sudah Terdaftar.');
+            } else {
                 $data = ['nama_kategori' => $nama_kategori];
                 if ($this->mKategori->insertData($data)) {
-                    $response = array('response' => 'success', 'message' => 'Record added Successfully');
+                    $response = array('responce' => 'success', 'message' => 'Data berhasil ditambahkan.');
                 } else {
-                    $response = array('response' => 'error', 'message' => 'Terjadi Kesalahan, Data GAGAL di Simpan');
+                    $response = array('responce' => 'error', 'message' => 'Terjadi Kesalahan, Data GAGAL disimpan.');
                 }
             }
         }
@@ -72,16 +72,16 @@ class Kategori extends CI_Controller{
     }
 
     function hapusData(){
-        if ($this->input->is_ajax_request()) {
-            $id = $this->input->post('id_kategori');
-            if ($this->mKategori->deleteData($id)) {
-                $data = array('response' => 'success');
-            } else {
-                $data = array('response' => 'error');
-            }
-            echo json_encode($data);
-        } else {
-            echo "No direct script access allowed";
-        }
+		if ($this->input->is_ajax_request()) {
+			$id = $this->input->post('id_kategori');
+			if ($this->mKategori->deleteData($id)) {
+				$data = array('responce' => 'success');
+			} else {
+				$data = array('responce' => 'error');
+			}
+			echo json_encode($data);
+		} else {
+			echo "No direct script access allowed";
+		}
     }
 }
